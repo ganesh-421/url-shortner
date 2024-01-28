@@ -11,7 +11,16 @@ class StoreShortUrlRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
+    }
+    /**
+     * prepares request for validation
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'user_id' => auth()->id(),
+        ]);
     }
 
     /**
@@ -22,6 +31,7 @@ class StoreShortUrlRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id' => 'required|exists:users,id',
             'url' => 'required|url',
         ];
     }

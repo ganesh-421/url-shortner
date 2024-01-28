@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ShortUrlResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,8 @@ class ShortUrlResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'url' => $this->url,
-            'short_url' => $this->short_url,
-            'visits' => $this->visits,
-            'user' => new UserResource($this->whenLoaded('user')),
+            'name' => $this->name,
+            'email' => $this->email,
         ];
     }
 }

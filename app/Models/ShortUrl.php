@@ -9,10 +9,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ShortUrl extends Model
 {
     use HasFactory;
-    protected $fillable = ['url', 'short_url'];
+    protected $fillable = ['url', 'short_url', 'user_id', 'visits'];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'short_url';
     }
 }

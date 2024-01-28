@@ -5,22 +5,6 @@ import Alpine from "alpinejs";
 window.Alpine = Alpine;
 
 Alpine.start();
-function validate_form() {
-    var customInput = document.getElementById("custom").value;
-    var re = /^[a-zA-Z0-9_-]*$/;
-    if (!re.test(customInput)) {
-        var errorText = document.getElementById("errorCustomURL");
-        var customText = document.getElementById("postCustom");
-        if (customText != null) {
-            customText.classList.add("hidden");
-        }
-        errorText.innerHTML =
-            "Invalid custom URL! Only letters, numbers, underscores, and dashes are allowed!";
-        errorText.classList.remove("hidden");
-        return false;
-    }
-    return true;
-}
 var btnCopy = document.getElementById("btnCopy");
 if (btnCopy != null) {
     btnCopy.onclick = function () {

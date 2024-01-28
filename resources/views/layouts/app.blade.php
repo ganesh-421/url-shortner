@@ -9,6 +9,7 @@
     <title>{{ $title ?? "URL Shortner" }}</title>
 
     <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
@@ -19,12 +20,12 @@
 <body class="font-sans antialiased">
     @session('success')
     <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded absolute right-2 bottom-5" role="alert">
-        <span class="block sm:inline">{{$message}}</span>
+        <span class="block sm:inline">{{session('success')}}</span>
     </div>
     @endsession
     @session('error')
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded absolute right-2 bottom-5" role="alert">
-        <span class="block sm:inline">{{$message}}</span>
+        <span class="block sm:inline">{{session('error')}}</span>
     </div>
     @endsession
     <div class="min-h-screen bg-gray-100">
