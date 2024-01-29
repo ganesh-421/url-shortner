@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateShortUrlRequest;
 use App\Http\Resources\ShortUrlResource;
 use App\Models\ShortUrl;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
@@ -22,18 +22,23 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make([
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
-        ], $request->only(['email', 'password']));
-
+        ]);
+        // dd($validator->errors());
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors(),
+            ], 422);
+        }
         if (!Auth::attempt($validator->validated())) {
             return response()->json([
                 'error' => "Invalid Credentials..",
             ], 403);
         }
 
-        $token = Auth::user()->createToken()->plainTextToken;
+        $token = Auth::user()->createToken('auth-token')->plainTextToken;
 
         return response()->json([
             'success' => "Succesfully logged in..",

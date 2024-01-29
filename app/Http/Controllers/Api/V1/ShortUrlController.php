@@ -19,6 +19,7 @@ class ShortUrlController extends Controller
      */
     public function store(StoreShortUrlRequest $request)
     {
+
         if (request()->user()->cannot('create', ShortUrl::class)) {
             return response()->json([
                 'error' => "You must be logged in to the system",
@@ -26,17 +27,11 @@ class ShortUrlController extends Controller
             ], 403);
         }
         $data = $request->validated();
-        if ($data->fails()) {
-            return response()->json([
-                'error' => "Validation Error",
-                'messages' => $data->errors(),
-            ], 422);
-        }
         $createdUrl = ShortUrl::create($data);
         if ($createdUrl) {
             $short_url = base_convert($createdUrl->id * 100, 10, 36);
             $createdUrl->update([
-                'short_url' => $short_url,
+                'short_url' => url($short_url),
             ]);
         }
 

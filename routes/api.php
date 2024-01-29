@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\LoginController;
 use App\Http\Controllers\Api\V1\ShortUrlController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,4 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/shorten/url', [ShortUrlController::class, 'store'])->middleware('auth:sanctum');
-Route::post('/login', [ShortUrlController::class, 'store'])->name('api.login');
+Route::post('/login', [LoginController::class, 'store'])->name('api.login');
