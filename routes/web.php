@@ -23,9 +23,9 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::resource('short-url', 'App\Http\Controllers\ShortUrlController')->except(['edit', 'update']);
     Route::get('/{short_url}', [ShortUrlController::class, 'visit'])->name('visit');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('auth/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('auth/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('auth/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 
