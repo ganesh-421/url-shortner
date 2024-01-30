@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreShortUrlRequest;
 use App\Http\Requests\UpdateShortUrlRequest;
 use App\Models\ShortUrl;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class ShortUrlController extends Controller
@@ -13,7 +12,7 @@ class ShortUrlController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(): mixed
     {
         if (request()->user()->cannot('viewAny', ShortUrl::class)) {
             return redirect()->back()->with('error', "You can't view urls");
@@ -25,7 +24,7 @@ class ShortUrlController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create(): mixed
     {
         if (request()->user()->cannot('create', ShortUrl::class)) {
             return redirect()->back()->with('error', "You can't create urls");
@@ -56,7 +55,7 @@ class ShortUrlController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ShortUrl $shortUrl): View
+    public function show(ShortUrl $shortUrl): mixed
     {
         if (request()->user()->cannot('view', $shortUrl)) {
             return redirect()->back()->with('error', "You can't view this url, you must be owner of url to view one.");
