@@ -7,6 +7,7 @@ use App\Http\Requests\StoreShortUrlRequest;
 use App\Http\Requests\UpdateShortUrlRequest;
 use App\Http\Resources\ShortUrlResource;
 use App\Models\ShortUrl;
+use Illuminate\Http\JsonResponse;
 
 class ShortUrlController extends Controller
 {
@@ -15,9 +16,9 @@ class ShortUrlController extends Controller
      */
 
     /**
-     * Store a newly created resource in storage.
+     * create shortened url and return response with created url
      */
-    public function store(StoreShortUrlRequest $request)
+    public function store(StoreShortUrlRequest $request): JsonResponse
     {
 
         if (request()->user()->cannot('create', ShortUrl::class)) {

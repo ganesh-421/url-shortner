@@ -7,6 +7,7 @@ use App\Http\Requests\StoreShortUrlRequest;
 use App\Http\Requests\UpdateShortUrlRequest;
 use App\Http\Resources\ShortUrlResource;
 use App\Models\ShortUrl;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,9 +19,11 @@ class LoginController extends Controller
      */
 
     /**
-     * Store a newly created resource in storage.
+     * create login token and returns json response
+     * @param Request $request
+     * @return JsonResponse  
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
